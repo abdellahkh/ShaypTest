@@ -7,6 +7,7 @@
   align-items: center;
 }
 
+
 .main {
   padding: 5rem 0;
   flex: 1;
@@ -14,6 +15,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.mainHeader {
+  margin: 1rem;
+  display: flex;
+  max-width: 50%;
+  padding: 0 px;
+  text-align: left;
+  border: 1px solid #c81b1b;
+  border-radius: 50px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .footer {

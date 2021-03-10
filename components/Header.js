@@ -1,7 +1,10 @@
 import { Card } from "react-bootstrap";
+import styles from "../styles/Home.module.css";
 import { useQuery } from "react-query";
 
-export default function App() {
+
+
+export default function Header() {
   return <Headers />;
 }
 
@@ -16,10 +19,10 @@ function Headers() {
   if (error) return "An error has occurred: " + error.message;
 
   return (
-    <Card>
+    <Card className={styles.mainHeader}>
       <Card.Body>
         <Card.Text>
-        Nombres de cryptocurrencies présent sur le marché : {data.cryptocurrencies_number}
+        Nombres de cryptocurrencies présent sur le marché : <span>{data.cryptocurrencies_number}</span>
         </Card.Text>
         <Card.Text>
         La part du marché du bitcoin est de {data.bitcoin_dominance_percentage}%
