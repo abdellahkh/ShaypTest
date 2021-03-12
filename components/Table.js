@@ -37,7 +37,9 @@ const Table = ({ list }) => {
   } = useTable({ columns, data: list });
 
   return (
-    <table {...getTableProps()} style={{ border: "solid 1px blue" }}>
+    <table {...getTableProps()} style={{ 
+      border: "solid 1px blue"
+       }}>
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
