@@ -33,6 +33,7 @@ export const getStaticProps = async (context) => {
     throw new Error("error fetch data");
   }
   const data = await res.json();
+  // console.log("data => ",data)
   return {
     props: { crypto: data },
   };
@@ -49,8 +50,10 @@ const Details = ({ crypto }) => {
         <Card.Body>
           <Card.Title>{crypto.name}</Card.Title>
           <Card.Text>
-            With supporting text below as a natural lead-in to additional
-            content.
+            {crypto.description}
+          </Card.Text>
+          <Card.Text>
+            Started at : {crypto.started_at}
           </Card.Text>
         </Card.Body>
         <Card.Footer className="text-muted">2 days ago</Card.Footer>

@@ -11,7 +11,7 @@ function MyNav() {
       <Navbar.Brand href="#home">Shayp-Assessment</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto" class="topnav-centered">
+        <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/cryptos">Top 20</Nav.Link>
           <Nav.Link href="/converter">Converter</Nav.Link>

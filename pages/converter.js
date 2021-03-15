@@ -9,7 +9,7 @@ import { useState } from 'react'
 const converter = () => {
   const [choiceIn, setChoiceIn] = useState(null);
   const [choiceOut, setChoiceOut] = useState(null);
-  const [inputIn, setInputIn ] = useState(null);
+  const [inputIn, setInputIn ] = useState("");
   const [result, setResult] = useState(null);
   const [errorData,  setError] = useState(null);
 
