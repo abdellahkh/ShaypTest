@@ -1,6 +1,11 @@
 import {Dropdown, InputGroup, FormControl, Button} from 'react-bootstrap'
+import styles from "../styles/Home.module.css";
+
+
 import { useQuery } from 'react-query'
-import {useState} from 'react'
+import { useState } from 'react'
+
+
 const converter = () => {
   const [choiceIn, setChoiceIn] = useState(null);
   const [choiceOut, setChoiceOut] = useState(null);
@@ -35,18 +40,23 @@ const converter = () => {
       setResult(response.price);
    }
   return (
-    <div>
+    <div className={styles.formConverter}>
         <div>
-            <Button onClick={resetAll} variant="danger">Reset</Button>
-            <Dropdown onSelect={handleSelectIn}>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                {choiceIn ? choiceIn : 'Choix in'}
-              </Dropdown.Toggle>
-              <Dropdown.Menu >
+            <div className="mb-3">
+              <Button onClick={resetAll} variant="danger">Reset</Button>
+            </div>
+            <div>
+              <Dropdown onSelect={handleSelectIn}>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  {choiceIn ? choiceIn : 'Choix in'}
+                </Dropdown.Toggle>
+                <Dropdown.Menu >
                   {data.map(e => <Dropdown.Item eventKey={e.id} key={e.id}>{e.id}</Dropdown.Item>)}
-              </Dropdown.Menu>
-            </Dropdown>
-            <InputGroup className="mb-3">
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+            <div>
+              <InputGroup className="mb-3">
                 <InputGroup.Prepend>
                   
                 </InputGroup.Prepend>
@@ -58,6 +68,7 @@ const converter = () => {
                   aria-describedby="inputGroup-sizing-default"
                 />
               </InputGroup>
+            </div>    
         </div>
         <div>
             <Dropdown  onSelect={(e) => setChoiceOut(e)}>

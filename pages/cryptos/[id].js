@@ -22,7 +22,6 @@ export const getStaticProps = async (context) => {
   const id = context.params.id;
   const res = await fetch("https://api.coinpaprika.com/v1/coins/" + id);
   const data = await res.json();
-    // console.log(data);
   return {
     props: { crypto: data },
   };
