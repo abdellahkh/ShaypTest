@@ -2,7 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/cryptos/[id]": "pages/cryptos/[id].js",
-  "/converter": "pages/converter.js",
   "/cryptos": "pages/cryptos.js"
 }

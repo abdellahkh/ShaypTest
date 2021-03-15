@@ -12,13 +12,13 @@ function Home() {
   const { isLoading, error, data } = useQuery('listCoins', async () => { 
     const request = await fetch('https://api.coinpaprika.com/v1/coins');
     const res = await request.json();
-    let list = res.slice(0 ,20);
+    let list = res.slice(0 ,10);
     const finalListRequest = list.map( e => fetch(`https://api.coinpaprika.com/v1/coins/${e.id}/ohlcv/latest/`));
     const finalListResponse = await Promise.all(finalListRequest);
     const finalListResult = finalListResponse.map( async (res) => {
-      // if(!res.ok) {
-      //   throw new Error("Error fetching data")
-      // }
+      if(!res.ok) {
+        throw new Error("Error fetching data")
+      }
       return await res.json()
     });
 
