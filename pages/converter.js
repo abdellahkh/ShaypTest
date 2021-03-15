@@ -35,7 +35,7 @@ const converter = () => {
   const resetAll = () => {
     setChoiceIn(null);
     setChoiceOut(null);
-    setInputIn(null);
+    setInputIn("");
     setResult(null);
   }
 
