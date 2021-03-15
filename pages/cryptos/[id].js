@@ -41,7 +41,13 @@
 //   console.log(e);
 // }
 // };
-
+const Details = () => {
+  return (
+    <div>
+      hello
+    </div>
+  )
+}
 // const Details = ({ crypto }) => {
 //   return (
 //     <div>
@@ -62,4 +68,4 @@
 //   );
 // };
 
-// export default Details;
+export default Details;
