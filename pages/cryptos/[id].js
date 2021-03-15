@@ -8,7 +8,7 @@ export const getStaticPaths = async () => {
         throw new Error("Fetch list all not okay")
       }
       const dataRes = await res.json();
-      dataRes.slice(0, 20);
+      dataRes.slice(0, 10);
 
       const paths = dataRes.map((crypto) => {
         return {
