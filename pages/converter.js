@@ -11,11 +11,17 @@ const converter = () => {
   const [choiceOut, setChoiceOut] = useState(null);
   const [inputIn, setInputIn ] = useState(null);
   const [result, setResult] = useState(null);
+  const [errorData,  setError] = useState(null);
 
 
   const { isLoading, error, data } = useQuery('listCoins', () => 
     fetch('https://api.coinpaprika.com/v1/coins')
-      .then(res => res.json())
+      .then(res => {
+        if(!res.ok){
+          throw new Error("Error fetching data")
+        }
+        return res.json()
+      })
       .then(list => list.slice(0,20))
   )
   if (isLoading) return 'Loading...'
@@ -34,10 +40,20 @@ const converter = () => {
   }
 
    const computeValue = async () => {
-      const request = await fetch(`https://api.coinpaprika.com/v1/price-converter?base_currency_id=${choiceIn}&quote_currency_id=${choiceOut}&amount=${inputIn}`)
+     try {
+      const request = await fetch(`https://api.coinpaprika.com/v1/price-converter?base_currency_id=${choiceIn}&quote_currency_id=${choiceOut}&amount=${inputIn}`);
+      if(!request.ok){
+              throw new Error("Error fetching data")
+            }
       const response =await request.json()
-      
       setResult(response.price);
+      setError(null);
+     } catch(e){
+       console.log(e)
+       setError(e.message);
+     }
+      
+      
    }
   return (
     <div className={styles.formConverter}>
@@ -84,6 +100,9 @@ const converter = () => {
         <div>
           { choiceIn && choiceOut && inputIn &&  <Button onClick={computeValue} variant="danger">Change</Button>}
          
+        </div>
+        <div>
+          { errorData && <p>{errorData}</p> }
         </div>
         
         

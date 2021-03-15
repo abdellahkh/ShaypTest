@@ -2,29 +2,43 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Card from 'react-bootstrap/Card'
 
 export const getStaticPaths = async () => {
-  const res = await fetch("https://api.coinpaprika.com/v1/coins");
-  const dataRes = await res.json();
-  dataRes.slice(0, 20);
+  try {
+      const res = await fetch("https://api.coinpaprika.com/v1/coins");
+      if(!res.ok){
+        throw new Error("Fetch list all not okay")
+      }
+      const dataRes = await res.json();
+      dataRes.slice(0, 20);
 
-  const paths = dataRes.map((crypto) => {
-    return {
-      params: { id: crypto.id.toString() },
-    };
-  });
+      const paths = dataRes.map((crypto) => {
+        return {
+          params: { id: crypto.id.toString() },
+        };
+      });
 
-  return {
-    paths,
-    fallback: false,
-  };
+      return {
+        paths,
+        fallback: false,
+      };
+} catch(e){
+  console.log(e)
+}
 };
 
 export const getStaticProps = async (context) => {
+ try { 
   const id = context.params.id;
   const res = await fetch("https://api.coinpaprika.com/v1/coins/" + id);
+  if(!res.ok){
+    throw new Error("error fetch data");
+  }
   const data = await res.json();
   return {
     props: { crypto: data },
   };
+}catch(e){
+  console.log(e);
+}
 };
 
 const Details = ({ crypto }) => {

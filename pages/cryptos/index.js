@@ -11,30 +11,25 @@ function Home() {
 
   const { isLoading, error, data } = useQuery('listCoins', async () => { 
     const request = await fetch('https://api.coinpaprika.com/v1/coins');
-      const res = await request.json();
-      const list = res.slice(0 ,20);
-      const finalListRequest = list.map(async e => {
-        
-        return { ...e , request : await fetch(`https://api.coinpaprika.com/v1/coins/${e.id}/ohlcv/latest/`).then( r => r.json())}
-        }
-      )
-      // await Promise.all(finalListRequest.map(r => r.request));
-      // const test = finalListRequest.map( r => {
-      //   console.log(r)
-      //   return {
-      //     ...r , request : r.request.json()
-      //   }
-      // })
-      // await Promise.all(test.map(r => r.request));
+    const res = await request.json();
+    let list = res.slice(0 ,20);
+    const finalListRequest = list.map( e => fetch(`https://api.coinpaprika.com/v1/coins/${e.id}/ohlcv/latest/`));
+    const finalListResponse = await Promise.all(finalListRequest);
+    const finalListResult = finalListResponse.map( async (res) => {
+      // if(!res.ok) {
+      //   throw new Error("Error fetching data")
+      // }
+      return await res.json()
+    });
 
-      console.log(finalListRequest);
-      // await Promise.all(finalListRequest.map(r => r.request.json()));
-      // const finalListResult = await Promise.all(finalListRequest.map( (r) => r.request.json())) ;
+    const resToJson = await Promise.all(finalListResult);
 
-      // const finalListResponse = await Promise.all(finalListRequest);
-      // const finalListResult = await Promise.all(finalListResponse.map( (r) => r.json())) ;
-
-      console.log(finalListResult);
+    list = list.map((elt, index) => {
+      return {
+        ...elt,
+        details: resToJson[index][0]
+      }
+    })      
         return list;
     }
   )

@@ -18,6 +18,29 @@ const Table = ({ list }) => {
         accessor: "symbol",
       },
       {
+        Header: "Volume",
+        Cell: ({ cell: { row } }) => {
+          if(row.original.details){
+            return row.original.details.volume;
+          }
+          else {
+            return ("no value fetched")
+          }
+        },
+      },
+      {
+        Header: "24H variation",
+        Cell: ({ cell: { row } }) => {
+          if(row.original.details){
+          const value = row.original.details.close -  row.original.details.open 
+          return value;
+          }
+          else {
+            return ("no value fetched")
+          }
+        },
+      },
+      {
         Header: "Click",
         accessor: "id",
         Cell: ({ cell: { row } }) => {
